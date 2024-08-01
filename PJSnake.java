@@ -30,15 +30,11 @@ public class PJSnake extends JFrame implements ActionListener{
 
         public PJSnakePanel() {
             this.setPreferredSize(new Dimension(400, 500));
-            this.setBackground(Color.YELLOW);
+            this.setBackground(new Color(175, 215, 70));
         }
 
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
-            g.setColor(Color.RED);
-            g.fillRect(200, 250, 100, 200);
-            g.setColor(new Color(113, 44, 55));
-            g.fillOval(100, 200, 100, 100);
         }
     }
 }
