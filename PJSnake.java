@@ -5,7 +5,8 @@ import javax.swing.event.*;
 
 public class PJSnake extends JFrame implements ActionListener{
 
-    // volatile int x = 200;
+    int cell_size = 40;
+    int cell_number = 20;
 
     public static void main(String[] args) {
         new PJSnake();
@@ -22,19 +23,28 @@ public class PJSnake extends JFrame implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent ae) {
-           // x++;
-           //repaint();
     }
 
     public class PJSnakePanel extends JPanel {
 
         public PJSnakePanel() {
-            this.setPreferredSize(new Dimension(400, 500));
+            this.setPreferredSize(new Dimension(cell_number * cell_size, cell_number * cell_size));
             this.setBackground(new Color(175, 215, 70));
         }
 
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
+            new Apple().drawApple(g);
+        }
+    }
+
+    class Apple {
+        int appleX = 5;
+        int appleY = 4;
+
+        public void drawApple(Graphics g) {
+            g.setColor(new Color(126, 155, 114));
+            g.fillRect(appleX, appleY, cell_size, cell_size  );
         }
     }
 }
