@@ -5,7 +5,7 @@ import javax.swing.event.*;
 
 public class PJSnake extends JFrame implements ActionListener{
 
-    volatile int x = 200;
+    // volatile int x = 200;
 
     public static void main(String[] args) {
         new PJSnake();
@@ -17,13 +17,13 @@ public class PJSnake extends JFrame implements ActionListener{
         this.add(new PJSnakePanel());
         this.pack();
         this.setVisible(true);
-        Timer timer = new Timer(16, this);
-        timer.start();
+        //Timer timer = new Timer(16, this);
+        //timer.start();
     }
 
     public void actionPerformed(ActionEvent ae) {
-            x++;
-            repaint();
+           // x++;
+           //repaint();
     }
 
     public class PJSnakePanel extends JPanel {
@@ -36,7 +36,9 @@ public class PJSnake extends JFrame implements ActionListener{
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
             g.setColor(Color.RED);
-            g.fillRect(x, 250, 100, 200);
+            g.fillRect(200, 250, 100, 200);
+            g.setColor(new Color(113, 44, 55));
+            g.fillOval(100, 200, 100, 100);
         }
     }
 }
