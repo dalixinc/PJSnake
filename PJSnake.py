@@ -8,7 +8,7 @@ class APPLE:
         self.pos = Vector2(self.x, self.y)
 
     def draw_apple(self):
-        apple_rect = pygame.Rect(self.pos.x * cell_size, self.pos.y * cell_size, cell_size, cell_size)
+        apple_rect = pygame.Rect(int(self.pos.x * cell_size), int(self.pos.y * cell_size), cell_size, cell_size)
         pygame.draw.rect(screen, (126, 166, 114),apple_rect)
 
 pygame.init()

@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.util.Random;
 
-public class PJSnake extends JFrame implements ActionListener{
+public class PJSnake extends JFrame implements ActionListener {
 
     int cell_size = 40;
     int cell_number = 20;
@@ -17,6 +17,10 @@ public class PJSnake extends JFrame implements ActionListener{
         Vector2 sum = new Vector2(0, 0);
         sum = sum.add(v1, v2);
         System.out.println(sum.x + " , " + sum.y);
+
+        Vector2 v3 = new Vector2(5, 5);
+        Vector2 v4 = v3.add(v2);
+        System.out.println(v4.x + " , " + v4.y);
     }
 
     public PJSnake() {
@@ -40,12 +44,17 @@ public class PJSnake extends JFrame implements ActionListener{
         }
 
         public void paintComponent(Graphics g) {
+
+
+
+
             super.paintComponent(g);
             new Apple().drawApple(g);
         }
     }
 
-    class Apple {private
+
+    private class Apple {
         int appleX = random.nextInt(cell_number -1);
         int appleY = random.nextInt(cell_number -1);
 
@@ -54,19 +63,27 @@ public class PJSnake extends JFrame implements ActionListener{
             g.fillRect(appleX * cell_size, appleY * cell_size, cell_size, cell_size  );
         }
     }
+}
 
-    class Vector2 {
+class Vector2 {
 
-         int x;
-         int y;
+        int x;
+        int y;
 
-         Vector2(int x, int y) {
-            this.x = x;
-            this.y = y;
+        Vector2() {
+            this(0, 0);
         }
 
-        Vector2 add (Vector2 v1, Vector2 v2) {
-            return new Vector2(v1.x + v2.x, v1.y + v2.y);
-        }
+        Vector2(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    static Vector2 add(Vector2 v1, Vector2 v2) {
+        return new Vector2(v1.x + v2.x, v1.y + v2.y);
+    }
+
+    Vector2 add(Vector2 addend) {
+        return new Vector2(this.x + addend.x, this.y + addend.y);
     }
 }
