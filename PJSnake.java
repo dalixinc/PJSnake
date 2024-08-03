@@ -12,7 +12,7 @@ public class PJSnake extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         new PJSnake();
-        Vector2 v1 = new Vector2(7, 8);
+        /* Vector2 v1 = new Vector2(7, 8);
         Vector2 v2 = new Vector2(2, 3);
         Vector2 sum = new Vector2(0, 0);
         sum = sum.add(v1, v2);
@@ -20,7 +20,7 @@ public class PJSnake extends JFrame implements ActionListener {
 
         Vector2 v3 = new Vector2(5, 5);
         Vector2 v4 = v3.add(v2);
-        System.out.println(v4.x + " , " + v4.y);
+        System.out.println(v4.x + " , " + v4.y); */
     }
 
     public PJSnake() {
@@ -39,6 +39,7 @@ public class PJSnake extends JFrame implements ActionListener {
     public class PJSnakePanel extends JPanel {
 
         Apple apple;
+        Snake snake;
 
         public PJSnakePanel() {
             this.setPreferredSize(new Dimension(cell_number * cell_size, cell_number * cell_size));
@@ -46,11 +47,24 @@ public class PJSnake extends JFrame implements ActionListener {
 
             // DRAW OBJECTS
             apple = new Apple();
+            snake = new Snake();
         }
 
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
             apple.drawApple(g);
+            snake.drawSnake(g);
+        }
+    }
+
+    private class Snake {
+        Vector2[] body = {new Vector2(5, 10), new Vector2(6, 10), new Vector2(7, 10)};
+
+        public void drawSnake(Graphics g) {
+            for (Vector2 s : body) {
+                g.setColor(new Color(183, 121, 122));
+                g.fillRect(s.x * cell_size, s.y * cell_size, cell_size, cell_size);
+            }
         }
     }
 
@@ -61,7 +75,7 @@ public class PJSnake extends JFrame implements ActionListener {
 
         public void drawApple(Graphics g) {
             g.setColor(new Color(126, 166, 114));
-            g.fillRect(applePos.x * cell_size, applePos.y * cell_size, cell_size, cell_size  );
+            g.fillRect(applePos.x * cell_size, applePos.y * cell_size, cell_size, cell_size);
         }
     }
 }
