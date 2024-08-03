@@ -38,29 +38,30 @@ public class PJSnake extends JFrame implements ActionListener {
 
     public class PJSnakePanel extends JPanel {
 
+        Apple apple;
+
         public PJSnakePanel() {
             this.setPreferredSize(new Dimension(cell_number * cell_size, cell_number * cell_size));
             this.setBackground(new Color(175, 215, 70));
+
+            // DRAW OBJECTS
+            apple = new Apple();
         }
 
         public void paintComponent(Graphics g) {
-
-
-
-
             super.paintComponent(g);
-            new Apple().drawApple(g);
+            apple.drawApple(g);
         }
     }
-
 
     private class Apple {
         int appleX = random.nextInt(cell_number -1);
         int appleY = random.nextInt(cell_number -1);
+        Vector2 applePos = new Vector2(appleX, appleY);
 
         public void drawApple(Graphics g) {
-            g.setColor(new Color(126, 155, 114));
-            g.fillRect(appleX * cell_size, appleY * cell_size, cell_size, cell_size  );
+            g.setColor(new Color(126, 166, 114));
+            g.fillRect(applePos.x * cell_size, applePos.y * cell_size, cell_size, cell_size  );
         }
     }
 }

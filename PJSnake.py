@@ -17,6 +17,7 @@ cell_number = 20
 screen = pygame.display.set_mode((cell_number * cell_size, cell_number * cell_size))
 clock = pygame.time.Clock()
 
+# CREATE OBJECTS
 apple = APPLE()
 
 while True:
