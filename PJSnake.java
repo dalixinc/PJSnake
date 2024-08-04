@@ -80,19 +80,17 @@ public class PJSnake extends JFrame {
         boolean addBlock = false;
 
         public void moveSnake() {
+            int copySize = this.body.length;
 
             if (addBlock) {
-                Vector2[] body_copy = new Vector2[this.body.length + 1];
-                System.arraycopy(this.body, 0, body_copy, 1, body.length );
-                body_copy[0] = new Vector2(body[0].x, body[0].y).add(direction);
-                this.body = body_copy;
+                copySize ++;
                 addBlock = false;
-            } else {
-                Vector2[] body_copy = new Vector2[this.body.length];
-                System.arraycopy(this.body, 0, body_copy, 1, body.length - 1);
-                body_copy[0] = new Vector2(body[0].x, body[0].y).add(direction);
-                this.body = body_copy;
-            }
+            } 
+
+            Vector2[] body_copy = new Vector2[copySize];
+            System.arraycopy(this.body, 0, body_copy, 1, copySize - 1);
+            body_copy[0] = new Vector2(body[0].x, body[0].y).add(direction);
+            this.body = body_copy;
             repaint();
          }
 
