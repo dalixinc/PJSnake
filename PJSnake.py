@@ -9,10 +9,15 @@ class MAIN:
 
     def update(self):
         self.snake.move_snake()
+        self.check_collision()
 
     def draw(self):
         self.apple.draw_apple()
         self.snake.draw_snake()
+
+    def check_collision(self):
+        if self.apple.pos == self.snake.body[0]:
+            print('Schnacking')
 
 class SNAKE:
     def __init__(self):

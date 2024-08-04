@@ -43,6 +43,12 @@ public class PJSnake extends JFrame {
             this.addKeyListener(this);
         }
 
+        public void checkCollision() {
+            if (snake.body[0].isEqual(apple.applePos)) {
+                System.out.println("Schnacking!!!");
+            }
+        }
+
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
             apple.drawApple(g);
@@ -51,6 +57,7 @@ public class PJSnake extends JFrame {
 
         public void actionPerformed(ActionEvent ae) {
             snake.moveSnake();
+            this.checkCollision();
         }
 
         public void keyPressed(KeyEvent ke) {
@@ -118,6 +125,32 @@ class Vector2 {
 
     Vector2 add(Vector2 addend) {
         return new Vector2(this.x + addend.x, this.y + addend.y);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result * x * y * y;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Vector2))
+            return false;
+        Vector2 other = (Vector2)o;
+        return (x == other.x && y == other.y);
+    }
+
+    public boolean isEqual(Vector2 v) {
+        if (this == v || (this.x == v.x && this.y == v.y)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public String toString() {
