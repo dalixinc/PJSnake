@@ -4,23 +4,13 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.util.Random;
 
-public class PJSnake extends JFrame implements ActionListener {
-
+public class PJSnake extends JFrame {
     int cell_size = 40;
     int cell_number = 20;
     Random random = new Random();
 
     public static void main(String[] args) {
         new PJSnake();
-        /* Vector2 v1 = new Vector2(7, 8);
-        Vector2 v2 = new Vector2(2, 3);
-        Vector2 sum = new Vector2(0, 0);
-        sum = sum.add(v1, v2);
-        System.out.println(sum.x + " , " + sum.y);
-
-        Vector2 v3 = new Vector2(5, 5);
-        Vector2 v4 = v3.add(v2);
-        System.out.println(v4.x + " , " + v4.y); */
     }
 
     public PJSnake() {
@@ -28,15 +18,13 @@ public class PJSnake extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(PJSnake.EXIT_ON_CLOSE);
         this.add(new PJSnakePanel());
         this.pack();
+        this.setIgnoreRepaint(true);
         this.setVisible(true);
         //Timer timer = new Timer(16, this);
         //timer.start();
     }
 
-    public void actionPerformed(ActionEvent ae) {
-    }
-
-    public class PJSnakePanel extends JPanel {
+    public class PJSnakePanel extends JPanel implements ActionListener {
 
         Apple apple;
         Snake snake;
@@ -48,6 +36,10 @@ public class PJSnake extends JFrame implements ActionListener {
             // DRAW OBJECTS
             apple = new Apple();
             snake = new Snake();
+
+            //TIMER
+            Timer timer = new Timer(150, this);
+            timer.start();
         }
 
         public void paintComponent(Graphics g) {
@@ -55,10 +47,33 @@ public class PJSnake extends JFrame implements ActionListener {
             apple.drawApple(g);
             snake.drawSnake(g);
         }
+
+
+        public void actionPerformed(ActionEvent ae) {
+            snake.moveSnake();
+        }
     }
 
     private class Snake {
         Vector2[] body = {new Vector2(5, 10), new Vector2(6, 10), new Vector2(7, 10)};
+        Vector2 vRight = new Vector2(1, 0);
+
+        public void moveSnake() {
+            Vector2[] body_copy = new Vector2[this.body.length];
+            System.arraycopy(this.body, 0, body_copy, 1, body.length - 1);
+
+            /* for (Vector2 v : body) {
+                System.out.println("body: x:" + v.x + " y: " + v.y) ;
+            }
+
+            for (Vector2 v : body) {
+                System.out.println("body_copy: x:" + v.x + " y: " + v.y) ;
+            } */
+
+            body_copy[0] = new Vector2(body[0].x, body[0].y).add(vRight);
+            this.body = body_copy;
+            repaint();
+         }
 
         public void drawSnake(Graphics g) {
             for (Vector2 s : body) {
@@ -100,5 +115,9 @@ class Vector2 {
 
     Vector2 add(Vector2 addend) {
         return new Vector2(this.x + addend.x, this.y + addend.y);
+    }
+
+    public String toString() {
+        return "x = " + x + " y = " + y;
     }
 }
