@@ -47,6 +47,7 @@ public class PJSnake extends JFrame {
             if (snake.body[0].isEqual(apple.applePos)) {
                 System.out.println("Schnacking!!!");
                 this.apple.createRandomApple();
+                snake.addBlock = true;
             }
         }
 
@@ -75,14 +76,23 @@ public class PJSnake extends JFrame {
 
     private class Snake {
         Vector2[] body = {new Vector2(5, 10), new Vector2(6, 10), new Vector2(7, 10)};
-        //Vector2 vRight = new Vector2(1, 0);
         Vector2 direction = new Vector2(1, 0);
+        boolean addBlock = false;
 
         public void moveSnake() {
-            Vector2[] body_copy = new Vector2[this.body.length];
-            System.arraycopy(this.body, 0, body_copy, 1, body.length - 1);
-            body_copy[0] = new Vector2(body[0].x, body[0].y).add(direction);
-            this.body = body_copy;
+
+            if (addBlock) {
+                Vector2[] body_copy = new Vector2[this.body.length + 1];
+                System.arraycopy(this.body, 0, body_copy, 1, body.length );
+                body_copy[0] = new Vector2(body[0].x, body[0].y).add(direction);
+                this.body = body_copy;
+                addBlock = false;
+            } else {
+                Vector2[] body_copy = new Vector2[this.body.length];
+                System.arraycopy(this.body, 0, body_copy, 1, body.length - 1);
+                body_copy[0] = new Vector2(body[0].x, body[0].y).add(direction);
+                this.body = body_copy;
+            }
             repaint();
          }
 

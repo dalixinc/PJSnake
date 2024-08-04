@@ -19,11 +19,13 @@ class MAIN:
         if self.apple.pos == self.snake.body[0]:
             print('Schnacking')
             self.apple.create_random_apple()
+            self.snake.add_block = True
 
 class SNAKE:
     def __init__(self):
         self.body = [Vector2(5,10), Vector2(6,10), Vector2(7,10)]
         self.direction = Vector2(1, 0)
+        self.add_block = False
 
     def draw_snake(self):
         for block in self.body:
@@ -32,9 +34,16 @@ class SNAKE:
 
     def move_snake(self):
         # Need a copy of the array (or list, as it is called in python)
-        body_copy = self.body[:-1] # Slicing - drop the last element
-        body_copy.insert(0, body_copy[0] + self.direction) # vector mathematics
-        self.body = body_copy[:] # move it back to the snake body
+        if self.add_block == True:
+            body_copy = self.body[:] # Slicing - keep the last element
+            body_copy.insert(0, body_copy[0] + self.direction) # vector mathematics
+            self.body = body_copy[:] # move it back to the snake body
+            self.add_block = False
+        else:
+            body_copy = self.body[:-1] # Slicing - drop the last element
+            body_copy.insert(0, body_copy[0] + self.direction) # vector mathematics
+            self.body = body_copy[:] # move it back to the snake body
+
 
 class APPLE:
     def __init__(self):
