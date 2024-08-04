@@ -36,13 +36,12 @@ class SNAKE:
         # Need a copy of the array (or list, as it is called in python)
         if self.add_block == True:
             body_copy = self.body[:] # Slicing - keep the last element
-            body_copy.insert(0, body_copy[0] + self.direction) # vector mathematics
-            self.body = body_copy[:] # move it back to the snake body
             self.add_block = False
         else:
             body_copy = self.body[:-1] # Slicing - drop the last element
-            body_copy.insert(0, body_copy[0] + self.direction) # vector mathematics
-            self.body = body_copy[:] # move it back to the snake body
+            
+        body_copy.insert(0, body_copy[0] + self.direction) # vector mathematics
+        self.body = body_copy[:] # move it back to the snake body
 
 
 class APPLE:
