@@ -1,6 +1,19 @@
 import pygame, sys, random
 from pygame.math import Vector2
 
+class MAIN:
+    def __init__(self):
+        # CREATE OBJECTS
+        self.snake = SNAKE()
+        self.apple = APPLE()
+
+    def update(self):
+        self.snake.move_snake()
+
+    def draw(self):
+        self.apple.draw_apple()
+        self.snake.draw_snake()
+
 class SNAKE:
     def __init__(self):
         self.body = [Vector2(5,10), Vector2(6,10), Vector2(7,10)]
@@ -34,12 +47,10 @@ cell_number = 20
 screen = pygame.display.set_mode((cell_number * cell_size, cell_number * cell_size))
 clock = pygame.time.Clock()
 
-# CREATE OBJECTS
-apple = APPLE()
-snake = SNAKE()
-
 SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE, 150)
+
+main_game = MAIN()
 
 # GAME LOOP
 while True:
@@ -49,21 +60,19 @@ while True:
             pygame.quit()
             sys.exit()
         if event.type == SCREEN_UPDATE:
-            snake.move_snake()
+            main_game.update()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                snake.direction = Vector2(0, -1)
+                main_game.snake.direction = Vector2(0, -1)
             if event.key == pygame.K_DOWN:
-                snake.direction = Vector2(0, 1)
+                main_game.snake.direction = Vector2(0, 1)
             if event.key == pygame.K_LEFT:
-                snake.direction = Vector2(-1, 0)
+                main_game.snake.direction = Vector2(-1, 0)
             if event.key == pygame.K_RIGHT:
-                snake.direction = Vector2(1, 0)
+                main_game.snake.direction = Vector2(1, 0)
 
     screen.fill(pygame.Color((175, 215, 70)))
-    apple.draw_apple()
-    snake.draw_snake()
-
+    main_game.draw()
     pygame.display.update()
     clock.tick(60)
 
