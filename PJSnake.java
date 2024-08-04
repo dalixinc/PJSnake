@@ -46,6 +46,7 @@ public class PJSnake extends JFrame {
         public void checkCollision() {
             if (snake.body[0].isEqual(apple.applePos)) {
                 System.out.println("Schnacking!!!");
+                this.apple.createRandomApple();
             }
         }
 
@@ -94,9 +95,18 @@ public class PJSnake extends JFrame {
     }
 
     private class Apple {
-        int appleX = random.nextInt(cell_number -1);
-        int appleY = random.nextInt(cell_number -1);
-        Vector2 applePos = new Vector2(appleX, appleY);
+        
+        Vector2 applePos;
+
+        Apple() {
+            createRandomApple();
+        }
+
+        public void createRandomApple() {
+            int appleX = random.nextInt(cell_number -1);
+            int appleY = random.nextInt(cell_number -1);
+            applePos = new Vector2(appleX, appleY);
+        }
 
         public void drawApple(Graphics g) {
             g.setColor(new Color(126, 166, 114));

@@ -18,6 +18,7 @@ class MAIN:
     def check_collision(self):
         if self.apple.pos == self.snake.body[0]:
             print('Schnacking')
+            self.apple.create_random_apple()
 
 class SNAKE:
     def __init__(self):
@@ -37,13 +38,16 @@ class SNAKE:
 
 class APPLE:
     def __init__(self):
-        self.x = random.randint(0, cell_number -1)
-        self.y = random.randint(0, cell_number -1)
-        self.pos = Vector2(self.x, self.y)
+        self.create_random_apple()
 
     def draw_apple(self):
         apple_rect = pygame.Rect(int(self.pos.x * cell_size), int(self.pos.y * cell_size), cell_size, cell_size)
         pygame.draw.rect(screen, (126, 166, 114), apple_rect)
+
+    def create_random_apple(self):
+        self.x = random.randint(0, cell_number -1)
+        self.y = random.randint(0, cell_number -1)
+        self.pos = Vector2(self.x, self.y)
 
 # INITIALISE GAME
 pygame.init()
