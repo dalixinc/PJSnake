@@ -27,6 +27,7 @@ class APPLE:
         apple_rect = pygame.Rect(int(self.pos.x * cell_size), int(self.pos.y * cell_size), cell_size, cell_size)
         pygame.draw.rect(screen, (126, 166, 114), apple_rect)
 
+# INITIALISE GAME
 pygame.init()
 cell_size = 40
 cell_number = 20
@@ -40,7 +41,7 @@ snake = SNAKE()
 SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE, 150)
 
-
+# GAME LOOP
 while True:
     # DRAW OBJECTS
     for event in pygame.event.get():
@@ -49,6 +50,15 @@ while True:
             sys.exit()
         if event.type == SCREEN_UPDATE:
             snake.move_snake()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                snake.direction = Vector2(0, -1)
+            if event.key == pygame.K_DOWN:
+                snake.direction = Vector2(0, 1)
+            if event.key == pygame.K_LEFT:
+                snake.direction = Vector2(-1, 0)
+            if event.key == pygame.K_RIGHT:
+                snake.direction = Vector2(1, 0)
 
     screen.fill(pygame.Color((175, 215, 70)))
     apple.draw_apple()
